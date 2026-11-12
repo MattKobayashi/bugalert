@@ -1,0 +1,57 @@
+---
+services:
+  bugalert:
+    build:
+      context: .
+      target: runtime
+    init: true
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    stop_grace_period: 45s
+    environment:
+      # Optional: fork PRs and local runs can use the bundled seed without it.
+      BUGALERT_ARISTA_TOKEN: ${BUGALERT_ARISTA_TOKEN:-}
+    volumes:
+      - type: bind
+        source: ./docker
+        target: /etc/bugalert
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: volume
+        source: test-state
+        target: /var/lib/bugalert
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
+  tests:
+    profiles:
+      - test
+    build:
+      context: .
+      target: test
+    init: true
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      bugalert:
+        condition: service_healthy
+    environment:
+      BUGALERT_TEST_BASE_URL: http://bugalert:8080
+    volumes:
+      # The suite validates this example, but local TOML stays out of images.
+      - type: bind
+        source: ./docker/config.toml
+        target: /opt/bugalert/docker/config.toml
+        read_only: true
+        bind:
+          create_host_path: false
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=128m
+volumes:
+  test-state:

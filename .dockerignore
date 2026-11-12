@@ -1,0 +1,22 @@
+# Allowlist the build inputs. In particular, never send the credential-bearing
+# legacy script, .env files, host virtualenv, live database, or local TOML files.
+**
+!Dockerfile
+!.dockerignore
+!pyproject.toml
+!uv.lock
+!README.md
+!src/
+!src/**
+!tests/
+!tests/**
+!bugalerts.json
+
+# Do not re-include generated files or credentials nested in source/tests.
+**/__pycache__/
+**/*.py[cod]
+**/.DS_Store
+**/.env
+**/.env.*
+**/*.pem
+**/*.key

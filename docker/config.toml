@@ -1,0 +1,14 @@
+# Container configuration example. Set these to the EOS releases you monitor.
+# This file is mounted at runtime; it is not included in the image.
+[eos]
+versions = ["4.32.8M", "4.33.5M", "4.34.2F"]
+
+[feed]
+refresh_seconds = 900
+timeout_seconds = 30
+new_window_hours = 72
+token_env = "BUGALERT_ARISTA_TOKEN"
+
+# The image includes the supplied seed snapshot, not your local runtime cache.
+seed_file = "/opt/bugalert/bugalerts.json"
+database_file = "/var/lib/bugalert/state.sqlite3"

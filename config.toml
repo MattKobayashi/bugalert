@@ -1,0 +1,15 @@
+# Replace these examples with the EOS releases running in your network.
+# Normal F/M release suffixes are accepted; special FX branches stay distinct.
+[eos]
+versions = ["4.29.7M", "4.33.11.2M", "4.34.2F", "4.34.9.2M"]
+
+[feed]
+refresh_seconds = 3600
+timeout_seconds = 30
+new_window_hours = 72
+token_env = "BUGALERT_ARISTA_TOKEN"
+
+# Paths are relative to this TOML file. The supplied dump is a local seed only;
+# successful downloads and discovery history are persisted in SQLite.
+seed_file = "bugalerts.json"
+database_file = ".bugalert/state.sqlite3"

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#142e2b">
+  <meta name="description" content="Version-aware Arista EOS bugs and security advisories for your network.">
+  <title>Bugalert — EOS release intelligence</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#alert-register">Skip to alerts</a>
+  <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/><path d="m8.5 12 2.2 2.2 4.8-4.8"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01M15 6.5h3M15 17.5h3"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="m9 3-.7 3-2 .9-2.7-.9-2 3.5 2.2 2v2.2l-2.2 2 2 3.5 2.8-.8 1.9 1 .7 2.6h4l.7-2.6 2-1 2.7.8 2-3.5-2.2-2v-2.2l2.2-2-2-3.5-2.7.9-2-.9L13 3H9Z" transform="translate(1 -1) scale(.95)"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6m0-6-9 9M10 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 7a7 7 0 0 1 11.5-1L20 9M4 15l2.4 3A7 7 0 0 0 18 17"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="m12 3 10 18H2L12 3Z"/><path d="M12 9v5m0 3h.01"/></symbol>
+    <symbol id="i-bug" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="5"/><path d="m9 7-2-4m8 4 2-4M3 10h4m10 0h4M3 15h4m10 0h4M5 21l3-3m8 0 3 3M12 8v12"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  </svg>
+
+  <button class="sidebar-scrim" id="sidebar-scrim" aria-label="Close navigation" hidden></button>
+  <aside class="sidebar" id="sidebar" aria-label="Workspace navigation">
+    <a class="brand" href="/">
+      <span class="brand-mark"><span></span></span>
+      <span><strong>bugalert<span class="brand-period">.</span></strong><small>EOS RELEASE INTELLIGENCE</small></span>
+    </a>
+    <div class="workspace-label"><span class="workspace-dot"></span> NETWORK OPERATIONS <span class="workspace-tag">01</span></div>
+    <nav class="primary-nav" aria-label="Alert views">
+      <p class="nav-label">WORKSPACE</p>
+      <button class="nav-item is-active" data-nav="all" aria-pressed="true"><svg class="icon"><use href="#i-grid"/></svg><span>All alerts</span><span class="nav-count" id="nav-total">—</span></button>
+      <button class="nav-item" data-nav="security" aria-pressed="false"><svg class="icon"><use href="#i-shield"/></svg><span>Security alerts</span><span class="nav-count" id="nav-security">—</span></button>
+      <button class="nav-item" data-nav="new" aria-pressed="false"><svg class="icon"><use href="#i-spark"/></svg><span>New discoveries</span><span class="nav-count" id="nav-new">—</span></button>
+    </nav>
+    <div class="release-navigation">
+      <div class="nav-label-row"><p class="nav-label">MONITORED RELEASES</p><button class="small-icon-button" data-open-config aria-label="View release configuration"><svg class="icon"><use href="#i-settings"/></svg></button></div>
+      <button class="all-releases is-active" id="all-releases" aria-pressed="true"><span>All releases</span><svg class="icon"><use href="#i-check"/></svg></button>
+      <div id="release-list" class="release-list"><p class="sidebar-loading">Reading your watchlist…</p></div>
+      <p class="watchlist-note">Your watchlist lives in TOML.<br>Changes sync automatically.</p>
+    </div>
+    <div class="sidebar-bottom">
+      <div class="feed-health"><span class="health-dot is-warning" id="health-dot"></span><div><strong id="health-title">Connecting to monitor</strong><span id="health-subtitle">Loading feed status…</span></div><span class="health-pulse" aria-hidden="true"></span></div>
+      <button class="config-button" data-open-config><svg class="icon"><use href="#i-settings"/></svg><span>Configuration</span><span class="mono">.toml</span></button>
+      <p class="sidebar-footnote">Independent tool · Arista EOS</p>
+    </div>
+  </aside>
+
+  <main class="main-shell">
+    <header class="topbar">
+      <div class="breadcrumbs"><button class="icon-button mobile-menu" id="menu-toggle" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false"><svg class="icon"><use href="#i-menu"/></svg></button><span class="breadcrumb-mark" aria-hidden="true">/</span><span>Workspace</span><span class="breadcrumb-divider">/</span><strong>Release intelligence</strong></div>
+      <div class="connection-pill" id="connection-pill"><span class="status-dot"></span><span id="connection-text">Connecting</span></div>
+    </header>
+
+    <div class="page-content">
+      <section class="page-heading" aria-labelledby="page-title">
+        <div><p class="eyebrow"><span class="tiny-cross" aria-hidden="true">+</span> YOUR NETWORK. IN FOCUS.</p><h1 id="page-title">Every release.<br><em>A clearer picture.</em></h1><p class="page-description">Arista EOS bugs and security advisories,<br class="desktop-break"> matched to the versions you actually run.</p></div>
+        <div class="refresh-panel"><p class="eyebrow">LAST FEED CHECK</p><p class="last-check" id="last-check">Not checked yet</p><p class="next-check" id="next-check">Reading configuration…</p><button class="button button-primary" id="refresh-button"><svg class="icon"><use href="#i-refresh"/></svg><span>Check for updates</span></button></div>
+      </section>
+
+      <section class="stats-grid" aria-label="Watchlist overview">
+        <button class="stat-card stat-featured" data-stat="total"><span class="stat-top"><span>Matching alerts</span><svg class="icon"><use href="#i-grid"/></svg></span><strong class="stat-value" id="stat-total">—</strong><span class="stat-bottom">Across your monitored releases<svg class="icon"><use href="#i-arrow"/></svg></span></button>
+        <button class="stat-card" data-stat="security"><span class="stat-top"><span>Security alerts</span><svg class="icon"><use href="#i-shield"/></svg></span><strong class="stat-value" id="stat-security">—</strong><span class="stat-bottom"><span class="stat-dot security-dot"></span> CVEs &amp; published advisories<svg class="icon"><use href="#i-arrow"/></svg></span></button>
+        <button class="stat-card" data-stat="severity"><span class="stat-top"><span>Severity 1</span><svg class="icon"><use href="#i-alert"/></svg></span><strong class="stat-value" id="stat-severity">—</strong><span class="stat-bottom"><span class="stat-dot severity-dot"></span> Arista’s highest severity<svg class="icon"><use href="#i-arrow"/></svg></span></button>
+        <button class="stat-card" data-stat="new"><span class="stat-top"><span>New discoveries</span><svg class="icon"><use href="#i-spark"/></svg></span><strong class="stat-value" id="stat-new">—</strong><span class="stat-bottom" id="new-window-label">First seen in the last 72 hours<svg class="icon"><use href="#i-arrow"/></svg></span></button>
+      </section>
+
+      <div class="banner-stack" id="banner-stack" aria-live="polite"></div>
+
+      <section class="alert-register" id="alert-register" aria-labelledby="register-title" tabindex="-1">
+        <div class="register-heading"><div><div class="register-title-row"><h2 id="register-title">All alerts</h2><span class="count-pill" id="result-count">—</span></div><p id="register-description">A version-aware view of your EOS exposure.</p></div><button class="button button-secondary export-button" id="export-button" disabled><svg class="icon"><use href="#i-download"/></svg><span>Export view</span></button></div>
+        <div class="register-toolbar"><div class="type-tabs" role="group" aria-label="Alert type"><button class="type-tab is-active" data-kind="all" aria-pressed="true">All alerts</button><button class="type-tab" data-kind="bug" aria-pressed="false">Bugs</button><button class="type-tab" data-kind="security" aria-pressed="false"><svg class="icon"><use href="#i-shield"/></svg>Security</button></div><p class="source-stamp" id="source-stamp">Loading the feed…</p></div>
+        <div class="filter-bar">
+          <label class="search-field"><svg class="icon"><use href="#i-search"/></svg><span class="sr-only">Search summaries, bug IDs, CVEs, or releases</span><input id="search-input" type="search" placeholder="Search summaries, bug IDs, CVEs…" autocomplete="off" spellcheck="false"><kbd aria-hidden="true">/</kbd></label>
+          <label class="select-field"><span class="sr-only">Severity</span><select id="severity-filter"><option value="all">All severities</option><option value="sev1">Severity 1</option><option value="sev2">Severity 2</option><option value="sev3">Severity 3</option></select></label>
+          <label class="select-field release-select"><span class="sr-only">Monitored release</span><select id="release-filter"><option value="all">All releases</option></select></label>
+          <label class="select-field sort-select"><span class="sr-only">Sort alerts</span><select id="sort-select"><option value="newest">Newest exported</option><option value="severity">Severity first</option><option value="discovered">Recently discovered</option></select></label>
+        </div>
+        <div class="active-filters" id="active-filters" hidden><span id="filter-summary"></span><button class="text-button" id="clear-filters">Clear filters <span aria-hidden="true">×</span></button></div>
+        <div class="table-scroll" id="table-scroll" role="region" aria-label="Matching alerts" tabindex="0" aria-busy="true">
+          <table class="alerts-table"><thead><tr><th scope="col">ALERT / SUMMARY</th><th scope="col">SEVERITY</th><th scope="col">AFFECTED RELEASES</th><th scope="col">SAME-TRAIN FIX</th><th scope="col" class="date-column">EXPORTED</th></tr></thead><tbody id="alerts-body"><tr class="loading-row"><td colspan="5"><div class="loading-state"><span class="loading-orbit" aria-hidden="true"></span><p>Matching alerts to your releases…</p></div></td></tr></tbody></table>
+        </div>
+        <div class="table-footer"><p id="visible-count" aria-live="polite">Loading alerts…</p><div class="pagination"><span class="page-size">25 per page</span><button class="icon-button previous-page" id="previous-page" aria-label="Previous page" disabled><svg class="icon"><use href="#i-chevron"/></svg></button><span class="page-indicator" id="page-indicator">01 / 01</span><button class="icon-button" id="next-page" aria-label="Next page" disabled><svg class="icon"><use href="#i-chevron"/></svg></button></div></div>
+      </section>
+
+      <footer class="page-footer"><p><svg class="icon"><use href="#i-info"/></svg>Version-based screening. Confirm hardware and feature conditions in each alert.</p><span class="mono" id="generation-label">EOS / BUGALERT</span></footer>
+    </div>
+  </main>
+
+  <dialog id="detail-dialog" class="detail-dialog" aria-labelledby="detail-title">
+    <div class="detail-topbar"><span class="eyebrow" id="detail-kicker">ALERT DETAILS</span><div><button class="icon-button" id="copy-alert-link" aria-label="Copy link to this alert"><svg class="icon"><use href="#i-copy"/></svg></button><button class="icon-button" data-close="detail-dialog" aria-label="Close alert details"><svg class="icon"><use href="#i-close"/></svg></button></div></div>
+    <div class="detail-body" id="detail-body"><h2 id="detail-title">Loading alert…</h2></div>
+  </dialog>
+
+  <dialog id="config-dialog" class="config-dialog" aria-labelledby="config-title">
+    <div class="config-heading"><span class="eyebrow">THE WATCHLIST</span><button class="icon-button" data-close="config-dialog" aria-label="Close configuration"><svg class="icon"><use href="#i-close"/></svg></button></div>
+    <h2 id="config-title">Your releases.<br>Your source of truth.</h2><p class="config-intro">Edit the external TOML file on the server. Valid version and refresh-interval changes sync within two seconds. Invalid edits keep the last working configuration.</p>
+    <p class="field-caption">CONFIGURATION FILE</p><div class="config-path-row"><code id="config-path">config.toml</code><button class="icon-button" id="copy-config-path" aria-label="Copy configuration file path"><svg class="icon"><use href="#i-copy"/></svg></button></div>
+    <pre class="config-code" id="config-code">[eos]
+versions = []</pre>
+    <div class="config-token-note"><svg class="icon"><use href="#i-shield"/></svg><div><strong>Keep the credential on the server.</strong><p id="config-token-status">The token is read from an environment variable, never sent to this browser.</p></div></div><pre class="token-command" id="token-command">export BUGALERT_ARISTA_TOKEN='your-token'</pre>
+    <p class="config-footnote">F/M suffixes map to the standard EOS release. FX and hardware-specific branches remain distinct. Missing or disconnected graph lineages are explicitly marked as unevaluated.</p>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden><svg class="icon"><use href="#i-info"/></svg><span id="toast-message"></span><button class="icon-button" id="close-toast" aria-label="Dismiss notification"><svg class="icon"><use href="#i-close"/></svg></button></div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+jobs:
+  publish:
+    name: Publish
+    secrets: inherit
+    uses: MattKobayashi/actions-workflows/.github/workflows/publish.yaml@223a5ec6fde0c6a731eb2c3713805337fa9a16be # v1.4.2
+    with:
+      image-name: bugalert
+name: Publish
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: write

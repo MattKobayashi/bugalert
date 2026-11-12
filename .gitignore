@@ -1,0 +1,20 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Local feed cache and observation history
+.bugalert/
+.pytest_cache/
+.ruff_cache/
+.env
+
+# Original reference script contains a supplied hard-coded credential.
+# Keep it locally; use the environment-based bugalert-fetch command instead.
+bugalerts_json.py
