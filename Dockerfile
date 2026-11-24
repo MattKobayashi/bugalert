@@ -3,7 +3,7 @@
 # Keep builder and runtime on the same Python/OS image so the copied virtual
 # environment uses the same interpreter and native-library ABI. Refresh these
 # registry-verified manifest digests deliberately when applying security updates.
-FROM python:3.15-slim-trixie@sha256:65a65fc7b30b06cb6df4930fd4650697cb23f4c2698ab81fc87e4b031bc36928 AS python-base
+FROM python:3.15-slim-trixie@sha256:2c879838405817bd51e53c75ab78f613f446c448070c2d70e2e99639705bd409 AS python-base
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
